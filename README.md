@@ -1,3 +1,16 @@
+# Game "Sweeper".
+
+Grid of cells with random hidden bombs.
+Click on each cell - discover what's inside
+
+* Create a grid of a given m x n size
+* Each cell is a function/component
+* Parent class Board - contains state of each cell
+* clickHandler in class Board
+* When all the cells are opened - finish
+* Bomb is given to a random cell.
+    * If bomb is found - all other cells are opened
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
