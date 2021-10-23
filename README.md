@@ -12,7 +12,7 @@ Click on each cell - discover what's inside
     * If bomb is found - all other cells are opened
 
 ## Game look
-<!-- ![Alt text](/game.png?raw=true "Game Bomber") -->
+![Alt text](/game.png?raw=true "Game Bomber")
 
 # Getting Started with Create React App
 
