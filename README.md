@@ -11,6 +11,9 @@ Click on each cell - discover what's inside
 * Bomb is given to a random cell.
     * If bomb is found - all other cells are opened
 
+## Game look
+![Alt text](/game.png?raw=true "Game Bomber")
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
