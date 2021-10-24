@@ -1,6 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
+
+function shallowCopy(o) {
+  return JSON.parse(JSON.stringify(o));
+}
+
+function OpenAllCell(props) {
+  return (
+    <button onClick={props.handleClearAllClick}>
+      Open all
+    </button>
+  )
+}
 
 function Cell(props) {
   let cls = 'grid-button-item'
@@ -27,23 +39,32 @@ class Board extends React.Component {
     }
   }
 
-  bombExpoded() {
-    const cells = this.state.cells.map(c => {
+  openAll(cells) {
+    return cells.map(c => {
       c.status = 'opened';
       return c;
     })
   }
 
+  shallowCopy(o) {
+    return JSON.parse(JSON.stringify(o));
+  }
+
   handleClick(i) {
     console.log(`${i} clicked. status: ${this.state.cells[i].status}`);
-    const cells = this.state.cells.slice();
+    let cells = shallowCopy(this.state.cells);
     cells[i].status = 'opened';
     if (this.state.cells[i].bomb) {
       cells[i].bomb = true;
-      this.bombExpoded();
+      cells = this.openAll(cells);
     }
     this.setState({cells: cells});
-    // console.log(`${this.state.cells[i].name} clicked. Status: ${this.state.cells[i].status}`);
+  }
+
+  handleClearAllClick() {
+    let cells = shallowCopy(this.state.cells);
+    cells = this.openAll(cells);
+    this.setState({cells: cells});
   }
 
   generateCells() {
@@ -76,11 +97,26 @@ class Board extends React.Component {
     )
   }
 
+  renderClearAllCell() {
+    return (
+      <OpenAllCell
+        // handleClearAllClick={() => this.handleClearAllClick()} // this works too
+        handleClearAllClick={this.handleClearAllClick.bind(this)}
+      />
+    )
+  }
+
   render() {
     return (
-      <div className="grid-container">
-        {this.state.cells.map(c => this.renderCell(c.name))}
-      </div>
+      <>
+        <div className="grid-container">
+          {this.state.cells.map(c => this.renderCell(c.name))}
+          {/* {this.renderClearAllCell()} */}
+        </div>
+        <div>
+          {this.renderClearAllCell()}
+        </div>
+      </>
     )
   }
 }
